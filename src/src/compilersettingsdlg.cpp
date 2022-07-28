@@ -30,7 +30,7 @@
 #include "configurationpanel.h"
 #include "compilersettingsdlg.h"
 #include "appglobals.h"
-#ifdef __WXMSW__
+#if defined(__WINDOWS__) || defined(__WXMSW__)
     #include "associations.h"
 #endif
 

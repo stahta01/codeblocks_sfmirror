@@ -1594,7 +1594,7 @@ namespace platform
 // one thing that's not checked yet are circular symlinks - watch out!
 wxString realpath(const wxString& path)
 {
-#ifdef __WXMSW__
+#if defined(__WINDOWS__) || defined(__WXMSW__)
     // no symlinks support on windows
     return path;
 #else

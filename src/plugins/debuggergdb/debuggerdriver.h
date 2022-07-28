@@ -7,7 +7,7 @@
 #define DEBUGGERDRIVER_H
 
 #ifndef WX_PRECOMP
-#   ifdef __WXMSW__
+#   if defined(__WINDOWS__) || defined(__WXMSW__)
 #       include <wx/msw/wrapwin.h>  // Needed to prevent GetCommandLine define bug.
 #   endif
 #endif

@@ -8,7 +8,7 @@
 
 #include "scrollingdialog.h"
 
-#ifdef __WXMSW__
+#if defined(__WINDOWS__) || defined(__WXMSW__)
     #define DDE_SERVICE "CODEBLOCKS"
 #else
     #define DDE_SERVICE "/tmp/CODEBLOCKS%s.socket"

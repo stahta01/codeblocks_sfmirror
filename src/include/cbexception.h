@@ -52,7 +52,7 @@ class DLLIMPORT cbException
     // In unix we use kill to terminate the application, that makes gdb
     // keep it alive which makes debugging easier.
     // (thanks go to an unknown author)
-    #ifdef __WXMSW__
+    #if defined(__WINDOWS__) || defined(__WXMSW__)
         #define DIE() exit(1)
     #else
         #include <csignal>

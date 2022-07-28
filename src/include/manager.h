@@ -10,7 +10,7 @@
 #include <vector>
 
 #ifndef WX_PRECOMP
-#   ifdef __WXMSW__
+#   if defined(__WINDOWS__) || defined(__WXMSW__)
 #       include <wx/msw/wrapwin.h>  // Needed to prevent Yield define bug.
 #   endif
 #endif

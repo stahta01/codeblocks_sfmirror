@@ -837,7 +837,7 @@ struct ConsoleProcess : wxProcess
 int cbDebuggerPlugin::RunNixConsole(wxString &consoleTty)
 {
     consoleTty = wxEmptyString;
-#ifndef __WXMSW__
+#if !defined(__WINDOWS__) && !defined(__WXMSW__)
     // Start a terminal and put the shell to sleep with -e sleep 80000.
     // Fetch the terminal's tty, so we can tell the debugger what TTY to use,
     // thus redirecting program's stdin/stdout/stderr to the terminal.

@@ -19,7 +19,7 @@
 #include <filefilters.h>
 #include <wx/checklst.h>
 
- #ifdef __WXMSW__
+#if defined(__WINDOWS__) || defined(__WXMSW__)
     #include <wx/msw/registry.h>
     #include <shlobj.h> // for SHChangeNotify()
 #endif

@@ -777,7 +777,7 @@ MainFrame::MainFrame(wxWindow* parent)
 
     CreateIDE();
 
-#ifdef __WXMSW__
+#if defined(__WINDOWS__) || defined(__WXMSW__)
     SetIcon(wxICON(A_MAIN_ICON));
 #else
     SetIcon(wxIcon(app_xpm));

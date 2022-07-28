@@ -39,7 +39,7 @@ namespace appglobals
     const wxString AppUrl                = _T("https://www.codeblocks.org");
     const wxString AppContactEmail       = _T("info@codeblocks.org");
 
-#if defined(__WXMSW__)
+#if defined(__WINDOWS__) || defined(__WXMSW__)
     const wxString AppPlatform           = _T("Windows");
 #elif defined(__WXOS2__)
     const wxString AppPlatform           = _T("OS/2");

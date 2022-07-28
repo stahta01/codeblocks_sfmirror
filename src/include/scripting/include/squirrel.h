@@ -30,7 +30,7 @@ extern "C" {
 // We need to export the squirrel functions, so we can call them in plugins.
 // They would be exposed by the codeblocks.dll/libcodeblocks.so
 #ifndef SQUIRREL_API
-    #if defined(__WXMSW__)
+    #if defined(__WINDOWS__) || defined(__WXMSW__)
         #if defined(EXPORT_LIB)
             #define SQUIRREL_API __declspec (dllexport)
         #else

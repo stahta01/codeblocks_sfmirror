@@ -10,7 +10,7 @@
 Exclude VC++, because it has silly constraints on importing/exporting classes
 from DLLs. Instead, we build "sdk" as a static library
 */
-#if defined(__WXMSW__)
+#if defined(__WINDOWS__) || defined(__WXMSW__)
 	#ifndef DLLIMPORT
 		#if defined(EXPORT_LIB)
 			#define DLLIMPORT __declspec (dllexport)

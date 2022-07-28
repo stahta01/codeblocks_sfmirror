@@ -16,11 +16,9 @@ set CB_DEVEL_DIR=devel%1
 set CB_OUTPUT_DIR=output%1
 set CB_DEVEL_RESDIR=%CB_DEVEL_DIR%\share\CodeBlocks
 set CB_OUTPUT_RESDIR=%CB_OUTPUT_DIR%\share\CodeBlocks
-set CB_HANDLER_DIR=exchndl\win32\bin
 set CB_DOC_DIR=setup
 set TARGET=%1
 set TARGET_CUT=%TARGET:_64=%
-if NOT "%TARGET%" == "" if NOT "%TARGET%" == "%TARGET_CUT%" set CB_HANDLER_DIR=exchndl\win64\bin
 
 call:mkdirSilent "%CB_DEVEL_RESDIR%\compilers"
 call:mkdirSilent "%CB_DEVEL_RESDIR%\lexers"
@@ -241,13 +239,6 @@ echo Copying help files
 if not exist "%CB_OUTPUT_RESDIR%\docs" md "%CB_OUTPUT_RESDIR%\docs" > nul
 if exist "%CB_DOC_DIR%\codeblocks-en.chm" xcopy /D /y "%CB_DOC_DIR%\codeblocks-en.chm" "%CB_OUTPUT_RESDIR%\docs" > nul
 if exist "%CB_DOC_DIR%\index.ini"         xcopy /D /y "%CB_DOC_DIR%\index.ini"         "%CB_OUTPUT_RESDIR%\docs" > nul
-
-REM Copy these files later as stripping symbols would corrupt them
-echo Copying crash handler files
-xcopy /y "%CB_HANDLER_DIR%\*.dll" "%CB_DEVEL_DIR%"  > nul
-xcopy /y "%CB_HANDLER_DIR%\*.yes" "%CB_DEVEL_DIR%"  > nul
-xcopy /y "%CB_HANDLER_DIR%\*.dll" "%CB_OUTPUT_DIR%" > nul
-xcopy /y "%CB_HANDLER_DIR%\*.yes" "%CB_OUTPUT_DIR%" > nul
 
 ::--------------------------------------------------------
 ::-- Function section starts below here

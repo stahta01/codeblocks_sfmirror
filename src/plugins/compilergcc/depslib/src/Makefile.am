@@ -1,6 +1,8 @@
-AM_CFLAGS = -Wall -g -DDEPSLIB_UNIX -fno-strict-aliasing
+AM_CFLAGS = -Wall -g -DDEPSLIB_WINDOWS -fno-strict-aliasing
 
 noinst_LTLIBRARIES = libdepslib.la
+
+libdepslib_la_LDFLAGS = -mthreads -r
 
 libdepslib_la_SOURCES = alloc.c \
 			cache.c \

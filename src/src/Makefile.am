@@ -2,6 +2,9 @@ SUBDIRS = resources
 
 AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			$(CB_SQUIRREL_CFLAGS) \
+			-DWXUSINGDLL \
+			-DBUILDING_PLUGIN \
+			-D__WXMSW__ \
 			-I$(top_srcdir)/src/sdk/wxscintilla/include \
 			-I$(top_srcdir)/src/include
 
@@ -24,12 +27,24 @@ install-exec-hook:
 # wxAUI uses GTK+ libraries on wxGTK
 # codeblocks_LDFLAGS = $(WX_GTK_LIBS)
 
+if CODEBLOCKS_NT
+codeblocks_LDFLAGS = -Wl,--enable-auto-import
+endif
+
 codeblocks_LDADD =  ../sdk/libcodeblocks.la \
+			../sdk/scripting/squirrel/libsquirrel.la \
+			-lshfolder \
+			-lgdi32 \
+			-lkernel32 \
+			-luser32 \
+			-lcomctl32 \
+			-lexchndl \
 			$(WX_LIBS) \
 			$(WX_GTK_LIBS)
 
 codeblocks_SOURCES = app.cpp \
 			appglobals.cpp \
+			associations.cpp \
 			backtracedlg.cpp \
 			breakpointsdlg.cpp \
 			compilersettingsdlg.cpp \
@@ -68,6 +83,7 @@ codeblocks_SOURCES = app.cpp \
 
 noinst_HEADERS = app.h \
 			appglobals.h \
+			associations.h \
 			backtracedlg.h \
 			batchbuild.h \
 			breakpointsdlg.h \
@@ -107,8 +123,6 @@ noinst_HEADERS = app.h \
 
 man_MANS = codeblocks.1
 
-EXTRA_DIST = associations.cpp \
-			associations.h \
-			ipc.h \
+EXTRA_DIST = ipc.h \
 			ipc.cpp \
 			$(man_MANS)

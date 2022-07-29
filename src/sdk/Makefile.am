@@ -4,6 +4,10 @@ DIST_SUBDIRS = scripting wxscintilla resources
 AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			$(CB_GLIB2_CFLAGS) \
 			$(CB_SQUIRREL_CFLAGS) \
+			-DEXPORT_LIB \
+			-DEXPORT_EVENTS \
+			-DWXMAKINGDLL_SCI \
+			-DWXUSINGDLL \
 			-I$(top_srcdir)/src/include \
 			-I$(top_srcdir)/src/sdk/wxscintilla/include \
 			-I$(top_srcdir)/src/sdk/mozilla_chardet/include \
@@ -15,10 +19,11 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 
 lib_LTLIBRARIES = libcodeblocks.la
 
-libcodeblocks_la_LDFLAGS = -version-info @CODEBLOCKS_VERSION_INFO@
+libcodeblocks_la_LDFLAGS = -no-undefined -version-info @CODEBLOCKS_VERSION_INFO@
 
 libcodeblocks_la_LIBADD = scripting/bindings/libsqbindings.la \
 			wxscintilla/libwxscintilla.la \
+			-lgdi32 \
 			$(WX_LIBS) \
 			$(SCINTILLA_GTK_LIBS) \
 			$(CB_GLIB2_LIBS) \

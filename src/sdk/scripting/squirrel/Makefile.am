@@ -1,4 +1,5 @@
-AM_CPPFLAGS = -I$(top_srcdir)/src/include/scripting/include
+AM_CPPFLAGS = -DWXUSINGDLL -DEXPORT_LIB -D__WXMSW__ \
+			-I$(top_srcdir)/src/include/scripting/include
 
 noinst_LTLIBRARIES = libsquirrel.la
 

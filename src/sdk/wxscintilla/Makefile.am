@@ -6,10 +6,13 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			-I$(srcdir)/src/scintilla/src \
 			-DSCI_LEXER \
 			-DLINK_LEXERS \
-			-DGTK \
+			-DWXMAKINGDLL_SCI \
+			-DWXUSINGDLL \
 			-D__WX__
 
 noinst_LTLIBRARIES = libwxscintilla.la
+
+libwxscintilla_la_LIBADD = -lgdi32
 
 libwxscintilla_la_SOURCES = src/PlatWX.cpp \
 			src/ScintillaWX.cpp \

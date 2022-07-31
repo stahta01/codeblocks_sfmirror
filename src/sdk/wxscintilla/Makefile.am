@@ -6,8 +6,16 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			-I$(srcdir)/src/scintilla/src \
 			-DSCI_LEXER \
 			-DLINK_LEXERS \
-			-DGTK \
+			${WX_MSW_CXXFLAGS} \
 			-D__WX__
+
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-DWXMAKINGDLL_SCI \
+			-DWXUSINGDLL
+else
+AM_CPPFLAGS += -DGTK
+endif
 
 noinst_LTLIBRARIES = libwxscintilla.la
 

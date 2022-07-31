@@ -166,6 +166,8 @@ WX_GDK_CFLAGS=
 WX_GDK_LIBS=
 WX_X11_CFLAGS=
 WX_X11_LIBS=
+WX_MSW_CXXFLAGS=
+WX_MSW_LIBS=
 
 dnl default value is to (silently) do nothing in the makefile
 POSTLINK_COMMAND="@true"
@@ -263,6 +265,22 @@ case $WX_BASENAME in
     ;;
     *wx_msw*)
         AC_MSG_RESULT(wxMSW)
+
+        if test "x$BUILD_SPELLCHECKER_TRUE" = "x" ; then
+            if test "x$HAVE_PKG_CONFIG" = "xyes"; then
+                PKG_CHECK_MODULES([HUNSPELL], [hunspell])
+            fi
+        fi
+        if test "x$BUILD_NASSISHNEIDERMAN_TRUE" = "x" ; then
+            dnl Check whether boost is installed
+            AX_BOOST_BASE
+            AX_BOOST_SYSTEM
+        fi
+
+        CB_HUNSPELL_CFLAGS="$HUNSPELL_CFLAGS"
+        CB_HUNSPELL_LIBS="$HUNSPELL_LIBS"
+        WX_MSW_CXXFLAGS="-D__WXMSW__"
+        WX_MSW_LIBS="-lgdi32 -lcomctl32"
     ;;
     *wx_mac*)
         AC_MSG_RESULT(wxMac)
@@ -334,6 +352,8 @@ AC_SUBST(CB_FONTCONFIG_CFLAGS)
 AC_SUBST(CB_FONTCONFIG_LIBS)
 AC_SUBST(WX_X11_CFLAGS)
 AC_SUBST(WX_X11_LIBS)
+AC_SUBST(WX_MSW_CXXFLAGS)
+AC_SUBST(WX_MSW_LIBS)
 
 AC_SUBST(POSTLINK_COMMAND)
 AC_SUBST(MACSETFILE)
@@ -348,6 +368,9 @@ case `uname` in
         else
             PIC_CFLAGS="-KPIC"
         fi
+    ;;
+    MINGW*)
+        PIC_CFLAGS=""
     ;;
     *)
         PIC_CFLAGS="-fPIC"
@@ -599,4 +622,35 @@ echo "   CPPFLAGS:   ${CPPFLAGS}"
 echo "   LDFLAGS:    ${LDFLAGS}"
 echo "   CXX:        ${CXX}"
 echo "   CC:         ${CC}"
+echo
+echo "   WX_CFLAGS:            ${WX_CFLAGS}"
+echo "   WX_CXXFLAGS:          ${WX_CXXFLAGS}"
+echo "   WX_LIBS:              ${WX_LIBS}"
+echo "   BOOST_CPPFLAGS:       ${BOOST_CPPFLAGS}"
+echo "   BOOST_LDFLAGS:        ${BOOST_LDFLAGS}"
+echo "   CB_FONTCONFIG_CFLAGS: ${CB_FONTCONFIG_CFLAGS}"
+echo "   CB_FONTCONFIG_LIBS:   ${CB_FONTCONFIG_LIBS}"
+echo "   CB_GAMIN_CFLAGS:      ${CB_GAMIN_CFLAGS}"
+echo "   CB_GAMIN_LIBS:        ${CB_GAMIN_LIBS}"
+echo "   CB_GLIB2_CFLAGS:      ${CB_GLIB2_CFLAGS}"
+echo "   CB_GLIB2_LIBS:        ${CB_GLIB2_LIBS}"
+echo "   CB_HUNSPELL_CFLAGS:   ${CB_HUNSPELL_CFLAGS}"
+echo "   CB_HUNSPELL_LIBS:     ${CB_HUNSPELL_LIBS}"
+echo "   CB_SQUIRREL_CFLAGS:   ${CB_SQUIRREL_CFLAGS}"
+echo "   CB_SQUIRREL_LIBS:     ${CB_SQUIRREL_LIBS}"
+echo "   CB_TINYXML_CFLAGS:    ${CB_TINYXML_CFLAGS}"
+echo "   CB_TINYXML_LIBS:      ${CB_TINYXML_LIBS}"
+echo "   GTK_NOTEBOOK_FLAGS:   ${GTK_NOTEBOOK_FLAGS}"
+echo "   SCINTILLA_GTK_CFLAGS: ${SCINTILLA_GTK_CFLAGS}"
+echo "   SCINTILLA_GTK_LIBS:   ${SCINTILLA_GTK_LIBS}"
+echo "   WX_GTK_CFLAGS:        ${WX_GTK_CFLAGS}"
+echo "   WX_GTK_LIBS:          ${WX_GTK_LIBS}"
+echo "   WX_X11_CFLAGS:        ${WX_X11_CFLAGS}"
+echo "   WX_X11_LIBS:          ${WX_X11_LIBS}"
+echo "   WX_MSW_CXXFLAGS:      ${WX_MSW_CXXFLAGS}"
+echo "   WX_MSW_LIBS:          ${WX_MSW_LIBS}"
+echo "   HAVE_BZIP2:           ${HAVE_BZIP2}"
+echo "   HAVE_ZLIB:            ${HAVE_ZLIB}"
+echo "   HAVE_ASTYLE:          ${HAVE_ASTYLE}"
+echo "   HAVE_TINYXML:         ${HAVE_TINYXML}"
 echo

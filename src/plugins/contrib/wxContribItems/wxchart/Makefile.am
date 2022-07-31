@@ -1,12 +1,22 @@
 AM_CPPFLAGS = $(WX_CXXFLAGS) \
 		-I$(srcdir)/include
 
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-DWXMAKINGDLL_CHART \
+			-DWXUSINGDLL \
+			${WX_MSW_CXXFLAGS}
+endif
 
 wxcontribitemsdir=$(libdir)/codeblocks/wxContribItems
 
 wxcontribitems_LTLIBRARIES = libwxchartctrl.la
 
 libwxchartctrl_la_LDFLAGS = -version-info 0:1:0
+
+if CODEBLOCKS_NT
+libwxchartctrl_la_LDFLAGS += -no-undefined
+endif
 
 libwxchartctrl_la_LIBADD = $(WX_LIBS)
 

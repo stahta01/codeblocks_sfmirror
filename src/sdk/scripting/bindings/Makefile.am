@@ -3,6 +3,14 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			-I$(top_srcdir)/src/include \
 			-I$(top_srcdir)/src/sdk/wxscintilla/include
 
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-DEXPORT_LIB \
+			-DWXMAKINGDLL_SCI \
+			-DWXUSINGDLL \
+			${WX_MSW_CXXFLAGS}
+endif
+
 noinst_LTLIBRARIES = libsqbindings.la
 
 libsqbindings_la_SOURCES = \

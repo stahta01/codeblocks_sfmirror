@@ -1,5 +1,12 @@
 AM_CPPFLAGS = -I$(top_srcdir)/src/include/scripting/include
 
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-DEXPORT_LIB \
+			-DWXUSINGDLL \
+			${WX_MSW_CXXFLAGS}
+endif
+
 noinst_LTLIBRARIES = libsquirrel.la
 
 noinst_HEADERS = \

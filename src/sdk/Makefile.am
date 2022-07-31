@@ -13,13 +13,27 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			-I$(top_srcdir)/src/sdk/mozilla_chardet/include/xpcom/base \
 			-I$(top_srcdir)/src/sdk/mozilla_chardet/include/xpcom/glue
 
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-DEXPORT_LIB \
+			-DEXPORT_EVENTS \
+			-DWXMAKINGDLL_SCI \
+			-DWXUSINGDLL \
+			${WX_MSW_CXXFLAGS}
+endif
+
 lib_LTLIBRARIES = libcodeblocks.la
 
 libcodeblocks_la_LDFLAGS = -version-info @CODEBLOCKS_VERSION_INFO@
 
+if CODEBLOCKS_NT
+libcodeblocks_la_LDFLAGS += -no-undefined
+endif
+
 libcodeblocks_la_LIBADD = scripting/bindings/libsqbindings.la \
 			wxscintilla/libwxscintilla.la \
 			$(WX_LIBS) \
+			${WX_MSW_LIBS} \
 			$(SCINTILLA_GTK_LIBS) \
 			$(CB_GLIB2_LIBS) \
 			$(CB_TINYXML_LIBS) \

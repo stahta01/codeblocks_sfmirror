@@ -1,9 +1,19 @@
 SUBDIRS = resources
 
+.rc.lo:
+	$(LIBTOOL) --tag=RC --mode=compile $(WX_RESCOMP) $< -o $@
+
 AM_CPPFLAGS = $(WX_CXXFLAGS) \
 			$(CB_SQUIRREL_CFLAGS) \
 			-I$(top_srcdir)/src/sdk/wxscintilla/include \
 			-I$(top_srcdir)/src/include
+
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-DBUILDING_PLUGIN \
+			-DWXUSINGDLL \
+			${WX_MSW_CXXFLAGS}
+endif
 
 if GTK_NOTEBOOK
 GTK_NOTEBOOK_FLAGS = -DUSE_GTK_NOTEBOOK
@@ -27,6 +37,13 @@ install-exec-hook:
 codeblocks_LDADD =  ../sdk/libcodeblocks.la \
 			$(WX_LIBS) \
 			$(WX_GTK_LIBS)
+
+if CODEBLOCKS_NT
+codeblocks_LDADD += \
+			../sdk/scripting/squirrel/libsquirrel.la \
+			${WX_MSW_LIBS} \
+			-lexchndl
+endif
 
 codeblocks_SOURCES = app.cpp \
 			appglobals.cpp \
@@ -107,8 +124,18 @@ noinst_HEADERS = app.h \
 
 man_MANS = codeblocks.1
 
-EXTRA_DIST = associations.cpp \
-			associations.h \
+EXTRA_DIST = \
 			ipc.h \
 			ipc.cpp \
 			$(man_MANS)
+
+if CODEBLOCKS_NT
+codeblocks_SOURCES += \
+			associations.cpp
+noinst_HEADERS += \
+			associations.h
+else
+EXTRA_DIST += \
+			associations.cpp
+			associations.h
+endif

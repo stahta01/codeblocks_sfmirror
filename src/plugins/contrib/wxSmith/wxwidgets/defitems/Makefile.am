@@ -4,6 +4,7 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 
 if CODEBLOCKS_NT
 AM_CPPFLAGS += \
+			-I$(top_srcdir)/src/plugins/contrib/wxSmith/properties \
 			-DBUILDING_PLUGIN \
 			-DWXUSINGDLL \
 			${WX_MSW_CXXFLAGS}

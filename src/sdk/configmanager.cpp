@@ -63,7 +63,7 @@ wxString ConfigManager::config_folder;
 wxString ConfigManager::home_folder;
 wxString ConfigManager::data_path_user;
 wxString ConfigManager::data_path_global;
-#ifdef CB_AUTOCONF
+#if defined(CB_AUTOCONF) && !defined(__WXMSW__)
 wxString ConfigManager::plugin_path_global;
 #endif
 wxString ConfigManager::app_path;
@@ -541,7 +541,7 @@ wxString ConfigManager::GetFolder(SearchDirs dir)
             return ::wxGetCwd();
 
         case sdPluginsGlobal:
-#ifndef CB_AUTOCONF
+#if !defined(CB_AUTOCONF) || defined(__WXMSW__)
             return ConfigManager::data_path_global + wxFILE_SEP_PATH + _T("plugins");
 #else
             return ConfigManager::plugin_path_global;
@@ -1524,7 +1524,7 @@ void ConfigManager::InitPaths()
     else
         ConfigManager::data_path_global = UnixFilename(data_path_global);
 
-#ifdef CB_AUTOCONF
+#if defined(CB_AUTOCONF) && !defined(__WXMSW__)
     if (plugin_path_global.IsEmpty())
     {
         if (platform::windows)

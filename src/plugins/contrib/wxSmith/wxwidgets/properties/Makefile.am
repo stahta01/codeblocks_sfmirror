@@ -11,7 +11,12 @@ endif
 
 noinst_LTLIBRARIES = libwxsmith_wxwidgets_properties.la
 
-libwxsmith_wxwidgets_properties_la_LDFLAGS = @MODULE_SHARED_LDFLAGS@ -version-info 0:1:0 -no-undefined -avoid-version
+libwxsmith_wxwidgets_properties_la_LDFLAGS = @MODULE_SHARED_LDFLAGS@ -no-undefined -avoid-version
+
+if ! CODEBLOCKS_NT
+libwxsmith_wxwidgets_properties_la_LDFLAGS += \
+			-version-info 0:1:0
+endif
 
 libwxsmith_wxwidgets_properties_la_LIBADD = ../../../../../sdk/libcodeblocks.la
 

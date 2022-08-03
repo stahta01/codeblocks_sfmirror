@@ -20,6 +20,14 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 		-I$(srcdir)/../wxContribItems/wxled/ledpanel/include \
 		-I$(srcdir)/../wxContribItems/wxmathplot
 
+if CODEBLOCKS_NT
+AM_CPPFLAGS += \
+			-I.
+			-I$(top_srcdir)/src/plugins/contrib/wxContribItems/wxFlatNotebook/include
+			-DBUILDING_PLUGIN \
+			-DWXUSINGDLL \
+			${WX_MSW_CXXFLAGS}
+endif
 
 pluginlibdir = $(pkglibdir)/plugins
 

@@ -23,6 +23,10 @@ if CODEBLOCKS_LINUX
 AM_CPPFLAGS += -DENABLE_BINRELOC -DAPP_PREFIX="\"@prefix@\"" $(WX_GTK_CFLAGS) $(GTK_NOTEBOOK_FLAGS)
 endif
 
+if CODEBLOCKS_NT
+AM_CPPFLAGS += -DAPP_PREFIX="\"@prefix@\""
+endif
+
 bin_PROGRAMS = codeblocks
 
 # wxMac resource fork/unbundled app

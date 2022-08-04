@@ -1515,7 +1515,11 @@ void ConfigManager::InitPaths()
     if (data_path_global.IsEmpty())
     {
         if (platform::windows)
+#if defined(CB_AUTOCONF) && defined(wxINSTALL_PREFIX)
+            ConfigManager::data_path_global = wxString(wxINSTALL_PREFIX) + wxString("/share/codeblocks");
+#else
             ConfigManager::data_path_global = app_path + _T("\\share\\codeblocks");
+#endif
         else if (platform::macosx)
             ConfigManager::data_path_global = res_path + _T("/share/codeblocks");
         else

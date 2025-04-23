@@ -114,7 +114,6 @@ function SetupProject(project)
         project.AddLinkLib(_T("gdi32"));
         project.AddLinkLib(_T("winmm"));
         project.AddLinkLib(_T("dxguid"));
-        project.AddCommandsAfterBuild(_T("XCOPY $(#sdl2)\\bin\\*.dll $(TARGET_OUTPUT_DIR) /D /Y"));
     }
     else if (PLATFORM == PLATFORM_MAC)
     {

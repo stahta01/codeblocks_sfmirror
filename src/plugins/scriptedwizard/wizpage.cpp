@@ -475,6 +475,8 @@ void WizGenericSelectPathPanel::OnPageChanging(wxWizardEvent& event)
         wxString dir = Manager::Get()->GetMacrosManager()->ReplaceMacros(originalDir);
         if (!wxDirExists(dir))
         {
+            Manager::Get()->GetLogManager()->DebugLog(wxString::Format("dir location not found %s", dir));
+            Manager::Get()->GetLogManager()->DebugLog(wxString::Format("originalDir location not found %s", originalDir));
             cbMessageBox(_("Please select a valid location..."), _("Error"), wxICON_ERROR, GetParent());
             event.Veto();
             return;

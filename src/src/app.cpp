@@ -70,8 +70,10 @@
 #endif
 
 #ifdef __WXMSW__
-    #include "exchndl.h"         // Crash handler DLL -> includes windows.h, therefore
-    #include <wx/msw/winundef.h> // ...include this header file on the NEXT LINE (wxWidgets docs say so)
+    #if !defined(__MSYS__)
+        #include "exchndl.h"         // Crash handler DLL -> includes windows.h, therefore
+        #include <wx/msw/winundef.h> // ...include this header file on the NEXT LINE (wxWidgets docs say so)
+    #endif
     #include <commctrl.h>
 #endif
 
@@ -507,7 +509,7 @@ void CodeBlocksApp::InitDebugConsole()
 
 void CodeBlocksApp::InitExceptionHandler()
 {
-#ifdef __WXMSW__
+#if defined(__WXMSW__) && !defined(__MSYS__)
     ExcHndlInit();
 
     // If the executable folder is not writable, as it happens with releases installed under Program Files,

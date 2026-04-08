@@ -408,6 +408,9 @@ void ProjectFileOptionsDlg::SaveBuildCommandSelection()
 bool ProjectFileOptionsDlg::ToggleFileReadOnly(bool setReadOnly)
 {
 #ifdef __WXMSW__
+#if defined(__MSYS__) && !defined(_chmod)
+#define _chmod chmod
+#endif
     // Check for failure
     const int MS_MODE_MASK = 0x0000ffff; // low word
     int mask = setReadOnly ? _S_IREAD : ( _S_IREAD | _S_IWRITE );

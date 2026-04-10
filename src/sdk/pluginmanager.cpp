@@ -784,6 +784,11 @@ bool PluginManager::ReadManifestFile(const wxString& pluginFilename,
 #endif
             actual.Remove(0, 3);
 
+#if defined(__MSYS__)
+        if (actual.StartsWith("msys-"))
+            actual.Remove(0, 5);
+#endif
+
         actual = ConfigManager::LocateDataFile(actual, sdPluginsUser | sdDataUser | sdPluginsGlobal | sdDataGlobal);
         if (actual.empty())
         {
@@ -951,6 +956,11 @@ void PluginManager::ReadExtraFilesFromManifestFile(const wxString& pluginFilenam
     if (!platform::windows && actual.StartsWith("lib"))
 #endif
         actual.Remove(0, 3);
+
+#if defined(__MSYS__)
+    if (actual.StartsWith("msys-"))
+        actual.Remove(0, 5);
+#endif
 
     actual = ConfigManager::LocateDataFile(actual, sdPluginsUser | sdDataUser | sdPluginsGlobal | sdDataGlobal);
     if (actual.empty())

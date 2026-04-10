@@ -50,7 +50,7 @@
 # include "filesys.h"
 # include "pathsys.h"
 
-# ifdef OS_NT
+# if defined(OS_NT) && !defined(__MSYS__)
 
 # ifdef __BORLANDC__
 # if __BORLANDC__ < 0x550

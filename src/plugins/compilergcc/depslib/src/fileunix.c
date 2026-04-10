@@ -54,7 +54,7 @@
 # include "filesys.h"
 # include "pathsys.h"
 
-# ifdef USE_FILEUNIX
+# if defined(USE_FILEUNIX) || defined(__MSYS__)
 
 #if defined(OS_CYGWIN) /* TNB */
 #include <sys/unistd.h>

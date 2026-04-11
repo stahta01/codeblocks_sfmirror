@@ -7,7 +7,6 @@ AM_CPPFLAGS = $(WX_CXXFLAGS) \
 		-I$(top_srcdir)/src/plugins/contrib/wxSmith/wxwidgets \
 		-I$(top_srcdir)/src/plugins/contrib/wxSmith/wxwidgets/properties \
 		-I$(top_srcdir)/src/plugins/contrib/wxSmith/properties \
-		-I$(srcdir)/../wxContribItems/wxchart/include \
 		-I$(srcdir)/../wxContribItems/wxFlatNotebook/include \
 		-I$(srcdir)/../wxContribItems/wxImagePanel/include \
 		-I$(srcdir)/../wxContribItems/wxthings/include \
@@ -29,7 +28,6 @@ libwxsmithcontribitems_la_LDFLAGS = @MODULE_SHARED_LDFLAGS@ -version-info 0:1:0 
 
 libwxsmithcontribitems_la_LIBADD = ../../../sdk/libcodeblocks.la \
 		       ../wxSmith/libwxsmithlib.la \
-			../wxContribItems/wxchart/libwxchartctrl.la \
 			../wxContribItems/wxFlatNotebook/libwxflatnotebook.la \
 			../wxContribItems/wxImagePanel/libwximagepanel.la \
 			../wxContribItems/wxSpeedButton/libwxspeedbutton.la \
@@ -40,8 +38,7 @@ libwxsmithcontribitems_la_LIBADD = ../../../sdk/libcodeblocks.la \
 			../wxContribItems/wxmathplot/libwxmathplot.la \
 			$(WX_LIBS)
 
-EXTRA_DIST = $(srcdir)/wxchart/*.xpm \
-		$(srcdir)/wxchart/*.png \
+EXTRA_DIST = \
 		$(srcdir)/wximagebutton/*.xpm \
 		$(srcdir)/wximagepanel/*.xpm \
 		$(srcdir)/wxspeedbutton/*.xpm \
@@ -72,7 +69,6 @@ wxsmithcontribitems.zip: manifest.xml
 
 libwxsmithcontribitems_la_SOURCES = \
 ./wxflatnotebook/wxsFlatNotebook.cpp \
-./wxchart/wxschart.cpp \
 ./wxthings/wxscustombutton.cpp \
 ./wximagebutton/wxsimagebutton.cpp \
 ./wximagepanel/wxsimagepanel.cpp \
